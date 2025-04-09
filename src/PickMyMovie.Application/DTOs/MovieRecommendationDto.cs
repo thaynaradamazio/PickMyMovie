@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace PickMyMovie.Application.DTOs
+﻿namespace PickMyMovie.Application.DTOs
 {
-    internal class MovieRecommendationDto
+    public class MovieRecommendationDto
     {
+        public string Title { get; set; }
+        public string Description { get; set; }
+        public List<string> Justifications { get; set; }
     }
 }

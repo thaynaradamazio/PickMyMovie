@@ -1,12 +1,14 @@
-﻿using System;
+﻿using PickMyMovie.Domain.Entities;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PickMyMovie.Infrastructure.DataAccess
 {
-    internal class AppDbContext
+    public class PickMyMovieDbContext : DbContext
     {
+        public DbSet<Movie> Movies { get; set; }
+        public DbSet<Preference> Preferences { get; set; }
+        public DbSet<Rule> Rules { get; set; }
+
+        public PickMyMovieDbContext(DbContextOptions<PickMyMovieDbContext> options) : base(options) { }
     }
 }

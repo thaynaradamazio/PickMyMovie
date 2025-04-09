@@ -1,12 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace PickMyMovie.Domain.Entities
+﻿namespace PickMyMovie.Domain.Entities
 {
-    internal class Rule
+    public class Rule
     {
+        public int Id { get; set; }
+
+        public int PreferenceId { get; set; }
+        public Preference Preference { get; set; }
+
+        public int MovieId { get; set; }
+        public Movie Movie { get; set; }
+
+        public string Justification { get; set; }
     }
 }
