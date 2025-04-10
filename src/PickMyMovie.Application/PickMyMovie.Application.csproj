@@ -7,6 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.4" />
+    <PackageReference Include="MySqlConnector" Version="2.4.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\PickMyMovie.Communication\PickMyMovie.Communication.csproj" />
     <ProjectReference Include="..\PickMyMovie.Domain\PickMyMovie.Domain.csproj" />
     <ProjectReference Include="..\PickMyMovie.Exception\PickMyMovie.Exception.csproj" />

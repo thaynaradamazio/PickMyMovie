@@ -1,4 +1,5 @@
-﻿using PickMyMovie.Domain.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using PickMyMovie.Domain.Entities;
 using System.Collections.Generic;
 
 namespace PickMyMovie.Infrastructure.DataAccess
