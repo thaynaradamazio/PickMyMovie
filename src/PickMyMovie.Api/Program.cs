@@ -1,5 +1,8 @@
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using PickMyMovie.Application.Services;
 using PickMyMovie.Domain.Interfaces;
+using PickMyMovie.Infrastructure.DataAccess;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,6 +14,9 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<IMovieRecommendationService, MovieRecommendationService>();
+
+builder.Services.AddDbContext<PickMyMovieDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("Connection")));
 
 
 var app = builder.Build();

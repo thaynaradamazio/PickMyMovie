@@ -1,5 +1,7 @@
-﻿using PickMyMovie.Application.DTOs;
+﻿using Microsoft.EntityFrameworkCore;
+using PickMyMovie.Application.DTOs;
 using PickMyMovie.Domain.Interfaces;
+using PickMyMovie.Infrastructure.DataAccess;
 using System;
 
 namespace PickMyMovie.Application.Services
