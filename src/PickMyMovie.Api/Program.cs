@@ -3,6 +3,7 @@ using Microsoft.Extensions.Configuration;
 using PickMyMovie.Application.Services;
 using PickMyMovie.Domain.Interfaces;
 using PickMyMovie.Infrastructure.DataAccess;
+using PickMyMovie.Infrastructure.Migrations;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -36,4 +37,13 @@ app.UseAuthorization();
 
 app.MapControllers();
 
+await MigrateDatabase();
+
 app.Run();
+
+async Task MigrateDatabase()
+{
+    await using var scope = app.Services.CreateAsyncScope();
+
+    await DataBaseMigration.MigrateDataBase(scope.ServiceProvider);
+}
