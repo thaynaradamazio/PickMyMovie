@@ -16,8 +16,10 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IMovieRecommendationService, MovieRecommendationService>();
 
 builder.Services.AddDbContext<PickMyMovieDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("Connection")));
-
+    options.UseMySql(
+        builder.Configuration.GetConnectionString("Connection"),
+        ServerVersion.AutoDetect(builder.Configuration.GetConnectionString("Connection"))
+    ));
 
 var app = builder.Build();
 
