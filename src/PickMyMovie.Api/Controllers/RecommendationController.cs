@@ -19,11 +19,11 @@ namespace PickMyMovie.Api.Controllers
         [HttpPost("recommend")]
         public async Task<ActionResult<List<MovieRecommendationDto>>> RecommendMovies([FromBody] RecommendationRequestDto request)
         {
-            if (request.SelectedPreferenceIds == null || !request.SelectedPreferenceIds.Any())
-                return BadRequest("No preferences selected.");
+            var preferenceIds = new List<int> { request.GenreId, request.MoodId, request.DurationId };
 
-            var result = await _service.RecommendAsync(request.SelectedPreferenceIds);
+            var result = await _service.RecommendAsync(preferenceIds);
             return Ok(result);
         }
+
     }
 }

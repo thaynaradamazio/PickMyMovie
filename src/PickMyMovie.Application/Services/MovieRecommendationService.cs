@@ -17,21 +17,31 @@ namespace PickMyMovie.Application.Services
 
         public async Task<List<MovieRecommendationDto>> RecommendAsync(List<int> preferenceIds)
         {
-            var matchingRules = await _context.Rules
-                .Include(r => r.Movie)
-                .Include(r => r.Preference)
+            if (preferenceIds.Count != 3)
+                throw new ArgumentException("You must select exactly 3 preferences: one for Genre, Mood, and Duration.");
+
+            var matchingMovieIds = await _context.Rules
                 .Where(r => preferenceIds.Contains(r.PreferenceId))
+                .GroupBy(r => r.MovieId)
+                .Where(g => g.Select(r => r.PreferenceId).Distinct().Count() == 3)
+                .Select(g => g.Key)
                 .ToListAsync();
 
-            return matchingRules
-                .GroupBy(r => r.Movie)
-                .Select(g => new MovieRecommendationDto
+            var movies = await _context.Movies
+                .Where(m => matchingMovieIds.Contains(m.Id))
+                .Select(m => new MovieRecommendationDto
                 {
-                    Title = g.Key.Title,
-                    Description = g.Key.Description,
-                    Justifications = g.Select(r => r.Justification).Distinct().ToList()
+                    Title = m.Title,
+                    Description = m.Description,
+                    Justifications = _context.Rules
+                        .Where(r => r.MovieId == m.Id && preferenceIds.Contains(r.PreferenceId))
+                        .Select(r => r.Justification)
+                        .ToList()
                 })
-                .ToList();
+                .ToListAsync();
+
+            return movies;
         }
+
     }
 }

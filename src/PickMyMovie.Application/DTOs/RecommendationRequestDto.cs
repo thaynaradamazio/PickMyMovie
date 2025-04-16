@@ -2,6 +2,8 @@
 {
     public class RecommendationRequestDto
     {
-        public List<int> SelectedPreferenceIds { get; set; }
+        public int GenreId { get; set; }
+        public int MoodId { get; set; }
+        public int DurationId { get; set; }
     }
 }
